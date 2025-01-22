@@ -1,15 +1,13 @@
-/* General */
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     background: linear-gradient(to bottom, #121212, #1a1a1a);
     color: #ffffff;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
-    scroll-behavior: smooth; /* Enables smooth scrolling */
+    overflow-x: hidden;
+    scroll-behavior: smooth;
 }
 
-/* Navbar */
 .navbar {
     position: fixed;
     width: 100%;
@@ -48,30 +46,26 @@ body {
     color: #00ffcb;
 }
 
-
-/* Hero Section */
 .hero {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    height: 100vh; /* Ensure the hero section takes up the full height of the viewport */
-    position: relative; /* Allows stacking content over the canvas */
-    padding: 0 5%; /* Optional: Add some horizontal padding */
-    z-index: 1; /* Ensure content is on top */
-  }
-  
-  /* Hero Canvas (Background Animation) */
-  #hero-canvas {
-    position: absolute; /* Make the canvas background position absolute */
+    height: 100vh;
+    position: relative;
+    padding: 0 5%;
+    z-index: 1;
+}
+
+#hero-canvas {
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: -1; /* Ensure it stays behind the text */
-  }
-  
+    z-index: -1;
+}
 
 .hero-title {
     font-size: 4rem;
@@ -101,7 +95,6 @@ body {
     transform: scale(1.1);
 }
 
-/* Portfolio Sections */
 .portfolio-section {
     padding: 100px 5%;
 }
@@ -119,7 +112,6 @@ body {
     color: #aaaaaa;
 }
 
-/* Video Gallery */
 .video-gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -145,18 +137,17 @@ body {
     border: none;
 }
 
-/* Photo Gallery */
 .photo-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Adjust for responsiveness */
-    gap: 25px; /* Consistent spacing */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
 }
 
 .photo-card {
     position: relative;
     overflow: hidden;
     border-radius: 10px;
-    aspect-ratio: 16 / 9; /* Maintains a 1920x1080 ratio */
+    aspect-ratio: 16 / 9;
     background: rgba(255, 255, 255, 0.1);
     transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
@@ -164,7 +155,7 @@ body {
 .photo-card img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensures the image fills the card while maintaining its aspect ratio */
+    object-fit: cover;
     border-radius: 10px;
     transition: transform 0.3s ease;
 }
@@ -174,7 +165,6 @@ body {
     transform: scale(1.05);
 }
 
-/* Footer */
 footer {
     text-align: center;
     padding: 20px 5%;
@@ -193,7 +183,6 @@ footer a:hover {
     color: #00ffaa;
 }
 
-/* Responsiveness */
 @media (max-width: 768px) {
     .hero-title {
         font-size: 3rem;
