@@ -1,35 +1,87 @@
-// Navbar Scroll Animation
-gsap.from(".navbar", { y: -100, duration: 1, ease: "power3.out" });
+// Get the canvas element
+const canvas = document.getElementById('hero-canvas');
+const ctx = canvas.getContext('2d');
 
-// Hero Text Animation
-gsap.from(".hero-title", { opacity: 0, y: -50, duration: 1 });
-gsap.from(".hero-subtitle", { opacity: 0, y: 50, duration: 1, delay: 0.3 });
+// Set the canvas dimensions
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-// Portfolio Section Animation
-gsap.from(".section-title", { opacity: 0, y: -20, duration: 1, stagger: 0.2 });
+// Define the dot properties
+const dots = [];
+const numDots = 100;
+const dotRadius = 2;
+const dotColor = '#ffffff';
+const connectionDistance = 100;
 
-// Photo Tilt Effect
-VanillaTilt.init(document.querySelectorAll(".photo-card"), {
-  max: 20,
-  speed: 400,
-  glare: true,
-  "max-glare": 0.5,
-});
-// Smooth scrolling
-document.querySelectorAll('.navbar a[href^="#"], .cta-btn').forEach(link => {
-  link.addEventListener('click', function (e) {
-    e.preventDefault();
-    const targetId = this.getAttribute('href').substring(1);
-    const targetElement = document.getElementById(targetId);
-
-    if (targetElement) {
-      const offset = 80; // Fixed navbar height offset
-      const elementPosition = targetElement.offsetTop - offset;
-
-      window.scrollTo({
-        top: elementPosition,
-        behavior: 'smooth'
-      });
-    }
+// Create the dots
+for (let i = 0; i < numDots; i++) {
+  dots.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    vx: Math.random() * 2 - 1, // Increased speed
+    vy: Math.random() * 2 - 1, // Increased speed
   });
+}
+
+// Animate the dots
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (let i = 0; i < numDots; i++) {
+    const dot = dots[i];
+    ctx.beginPath();
+    ctx.arc(dot.x, dot.y, dotRadius, 0, Math.PI * 2);
+    ctx.fillStyle = dotColor;
+    ctx.fill();
+    dot.x += dot.vx;
+    dot.y += dot.vy;
+    if (dot.x < 0 || dot.x > canvas.width) {
+      dot.vx *= -1;
+    }
+    if (dot.y < 0 || dot.y > canvas.height) {
+      dot.vy *= -1;
+    }
+  }
+  // Connect the dots
+  for (let i = 0; i < numDots; i++) {
+    for (let j = i + 1; j < numDots; j++) {
+      const dot1 = dots[i];
+      const dot2 = dots[j];
+      const distance = Math.sqrt((dot1.x - dot2.x) ** 2 + (dot1.y - dot2.y) ** 2);
+      if (distance < connectionDistance) {
+        ctx.beginPath();
+        ctx.moveTo(dot1.x, dot1.y);
+        ctx.lineTo(dot2.x, dot2.y);
+        ctx.strokeStyle = dotColor;
+        ctx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+// Add event listener for mouse movement
+let mouseTimeout;
+canvas.addEventListener('mousemove', (e) => {
+  clearTimeout(mouseTimeout);
+  mouseTimeout = setTimeout(() => {
+    const x = e.clientX;
+    const y = e.clientY;
+    for (let i = 0; i < numDots; i++) {
+      const dot = dots[i];
+      const distance = Math.sqrt((dot.x - x) ** 2 + (dot.y - y) ** 2);
+      if (distance < 100) {
+        dot.vx += (x - dot.x) / 50; // Increased attraction speed
+        dot.vy += (y - dot.y) / 50; // Increased attraction speed
+      }
+    }
+  }, 50); // Keep the delay
+});
+
+// Add event listener for scroll
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  const blurAmount = (scrollY / window.innerHeight) * 10;
+  canvas.style.filter = `blur(${blurAmount}px)`;
 });
