@@ -1,215 +1,135 @@
-/* General */
-body {
-  font-family: 'Poppins', sans-serif;
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(to bottom, #121212, #1a1a1a);
-  color: #ffffff;
-  overflow-x: hidden; /* Prevent horizontal scrolling */
-  scroll-behavior: smooth; /* Enables smooth scrolling */
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ritesh Verma | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <a href="#hero" class="logo">Ritesh | Portfolio.</a>
+    <ul>
 
-/* Navbar */
-.navbar {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  background: rgba(0, 0, 0, 0.8);
-  padding: 15px 5%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 100;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-}
+      <li><a href="https://imimi328.github.io/Resume/" target="_blank">Resume</a></li>
 
-.navbar .logo {
-  color: #ffffff;
-  font-size: 1.8rem;
-  font-weight: 700;
-  text-decoration: none;
-}
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="#photos">Photos</a></li>
+      <li><a href="https://imimi328.github.io/Resume/" target="_blank">Resume</a></li>
+    </ul>
+  </header>
 
-.navbar ul {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-  margin: 0;
-}
+  <section id="hero" class="hero">
+    <div class="hero-content">
+        <h1 class="hero-title">Elevating Creativity Through Art</h1>
+        <p class="hero-subtitle">Masterpieces in Video and Photo Editing</p>
+        <a href="#videos" class="cta-btn">Discover My Work</a>
+    </div>
+    <canvas id="hero-canvas"></canvas>
+  </section>
 
-.navbar ul li a {
-  text-decoration: none;
-  color: #ffffff;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
+  <!-- Video Section -->
+  <section id="videos" class="portfolio-section">
+    <div class="container">
+      <h2 class="section-title">Video Editing</h2>
+      <p class="section-desc">Immersive visuals brought to life through my edits.</p>
+      <div class="video-gallery">
+        <!-- Video Links -->
+        <div class="video-card">
+          <iframe src="https://player.vimeo.com/video/1033377518?h=2fdef938d4" allowfullscreen></iframe>
+          <h3>Advertisement</h3>
+        </div>
+        <div class="video-card">
+          <iframe src="https://www.youtube.com/embed/r-Cxm-K4GVM" allowfullscreen></iframe>
+          <h3>Documentary style</h3>
+        </div>
+        <div class="video-card">
+          <iframe src="https://www.youtube.com/embed/U9dUnVU8PEE" allowfullscreen></iframe>
+          <h3>3D Scene</h3>
+        </div>
+        <div class="video-card">
+          <iframe src="https://www.youtube.com/embed/aDwq-YDF_aw" allowfullscreen></iframe>
+          <h3>VFX</h3>
+        </div>
+        <div class="video-card">
+          <iframe src="https://www.youtube.com/embed/5H07gIJ7Hv8" allowfullscreen></iframe>
+          <h3>VFX 1</h3>
+        </div>
+        <div class="video-card">
+          <iframe src="https://www.youtube.com/embed/_WX0Kf51EYk" allowfullscreen></iframe>
+          <h3>3D Animation</h3>
+        </div>
+        <div class="video-card">
+          <iframe src="https://www.youtube.com/embed/PZJk1k1mDIo" allowfullscreen></iframe>
+          <h3>3D Animation 1</h3>
+        </div>
+        <div class="video-card">
+          <iframe src="https://www.youtube.com/embed/bi-gWYtmlY4" allowfullscreen></iframe>
+          <h3>KeyFrame</h3>
+        </div>
+        <div class="video-card">
+          <iframe src="https://player.vimeo.com/video/1033378391?h=5d8f485eab" allowfullscreen></iframe>
+          <h3>Gaming Style</h3>
+        </div>
+        <div class="video-card">
+          <iframe src="https://www.youtube.com/embed/F-V_5u198cY" allowfullscreen></iframe>
+          <h3>Shorts or Reels</h3>
+        </div>
+        <div class="video-card">
+          <iframe src="https://www.youtube.com/embed/E2u8o_DbklQ" allowfullscreen></iframe>
+          <h3>Vlog style</h3>
+        </div>
+        <div class="video-card">
+          <iframe src="https://www.youtube.com/embed/JHo-qSLM5tk" allowfullscreen></iframe>
+          <h3>2D Animation</h3>
+        </div>
+      </div>
+    </div>
+  </section>
 
-.navbar ul li a:hover {
-  color: #00ffcb;
-}
+  <!-- Photo Section -->
+  <section id="photos" class="portfolio-section">
+    <div class="container">
+      <h2 class="section-title">Thumbnail Designing</h2>
+      <p class="section-desc">Snapshots transformed into captivating visuals.</p>
+      <div class="photo-gallery">
+        <div class="photo-card">
+          <img src="https://i.ibb.co/4T2k29Q/Thumbnail-3.jpg" alt="Creative Edit 1">
+          <h3>Creative Edit 1</h3>
+        </div>
+        <div class="photo-card">
+          <img src="https://i.ibb.co/dt3y0VX/Thumbnail-2.webp" alt="Creative Edit 2">
+          <h3>Creative Edit 2</h3>
+        </div>
+        <div class="photo-card">
+          <img src="https://i.ibb.co/kqw4HPt/Thumbnail.jpg" alt="Creative Edit 3">
+          <h3>Creative Edit 3</h3>
+        </div>
+        <div class="photo-card">
+          <img src="https://i.ibb.co/Rv3Zsz2/Advertisement.jpg" alt="Creative Edit 4">
+          <h3>Creative Edit 4</h3>
+        </div>
+        <div class="photo-card">
+          <img src="https://i.ibb.co/LJVxRwP/Post-processing.jpg" alt="Creative Edit 5">
+          <h3>Creative Edit 5</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+  
 
-/* Hero Section */
-.hero {
-  height: 100vh;
-  background: url('https://source.unsplash.com/1920x1080/?design') no-repeat center/cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 0 10%;
-}
-
-.hero-title {
-  font-size: 4rem;
-  margin-bottom: 20px;
-  color: #ffffff;
-  text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-}
-
-.hero-subtitle {
-  font-size: 1.5rem;
-  margin-bottom: 30px;
-  color: #cccccc;
-}
-
-.cta-btn {
-  padding: 15px 30px;
-  background: #00ffcb;
-  color: #000;
-  text-decoration: none;
-  border-radius: 30px;
-  transition: all 0.3s ease;
-  font-size: 1.2rem;
-}
-
-.cta-btn:hover {
-  background: #00ffaa;
-  transform: scale(1.1);
-}
-
-/* Portfolio Sections */
-.portfolio-section {
-  padding: 100px 5%;
-}
-
-.section-title {
-  font-size: 2.5rem;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.section-desc {
-  text-align: center;
-  font-size: 1.2rem;
-  margin-bottom: 40px;
-  color: #aaaaaa;
-}
-
-/* Video Gallery */
-.video-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 25px;
-}
-
-.video-card {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 20px;
-  border-radius: 10px;
-  transition: transform 0.3s ease, background 0.3s ease;
-}
-
-.video-card:hover {
-  transform: scale(1.05);
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.video-card iframe {
-  width: 100%;
-  height: 200px;
-  border-radius: 10px;
-  border: none;
-}
-
-/* Photo Gallery */
-.photo-gallery {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Adjust for responsiveness */
-  gap: 25px; /* Consistent spacing */
-}
-
-.photo-card {
-  position: relative;
-  overflow: hidden;
-  border-radius: 10px;
-  aspect-ratio: 16 / 9; /* Maintains a 1920x1080 ratio */
-  background: rgba(255, 255, 255, 0.1);
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-
-.photo-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Ensures the image fills the card while maintaining its aspect ratio */
-  border-radius: 10px;
-  transition: transform 0.3s ease;
-}
-
-.photo-card:hover {
-  box-shadow: 0 8px 15px rgba(141, 141, 141, 0.4);
-  transform: scale(1.05);
-}
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 Ritesh Verma. || Team Emogi. All rights reserved.</p>
+    <p>Contact me: Discord: <a href="https://www.discordapp.com/users/954607681694470165">imimi_geimeo</a> | Instagram: <a href="https://www.instagram.com/cyberforge07/">cyberforge07</a></p>
+  </footer>
 
 
-/* Footer */
-footer {
-  text-align: center;
-  padding: 20px 5%;
-  background: #0f0f0f;
-  color: #aaaaaa;
-  font-size: 0.9rem;
-}
 
-footer a {
-  text-decoration: none;
-  color: #00ffcb;
-  font-weight: 500;
-}
-
-footer a:hover {
-  color: #00ffaa;
-}
-
-/* Responsiveness */
-@media (max-width: 768px) {
-  .hero-title {
-    font-size: 3rem;
-  }
-
-  .hero-subtitle {
-    font-size: 1.2rem;
-  }
-
-  .cta-btn {
-    padding: 12px 25px;
-    font-size: 1rem;
-  }
-
-  .navbar ul {
-    gap: 15px;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-title {
-    font-size: 2.5rem;
-  }
-
-  .hero-subtitle {
-    font-size: 1rem;
-  }
-
-  .portfolio-section {
-    padding: 80px 3%;
-  }
-}
+  <script src="script.js"></script>
+</body>
+</html>
