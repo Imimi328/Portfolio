@@ -1,29 +1,119 @@
-// Initialize the animation
-window.onload = initBackgroundAnimation;
-
-// Function to check if the device is a mobile device
+// Add this device detection function at the top of your script.js
 function isMobileDevice() {
-  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  return (typeof window.orientation !== "undefined") || 
+         (navigator.userAgent.indexOf('IEMobile') !== -1) ||
+         (window.matchMedia('(max-width: 768px) and (hover: none)').matches);
 }
 
-// Function to initialize the background animation
-function initBackgroundAnimation() {
-  // Get the canvas element
-  const canvas = document.getElementById('hero-canvas');
+// Modified dot animation code
+function initDots() {
+  dots = [];
+  const dotCount = isMobileDevice() ? 10 : 100; // Reduce dots for mobile
+  const speedMultiplier = isMobileDevice() ? 0.3 : 1; // Slow down for mobile
+  
+  for (let i = 0; i < dotCount; i++) {
+    const x = Math.random() * canvas.width;
+    const y = Math.random() * canvas.height;
+    const dot = new Dot(x, y);
+    
+    // Reduce speed for mobile
+    if(isMobileDevice()) {
+      dot.vx *= speedMultiplier;
+      dot.vy *= speedMultiplier;
+    }
+    
+    dots.push(dot);
+  }
+}
 
-  // Check if the device is a mobile device
-  if (isMobileDevice()) {
-    // Disable the animation for mobile devices
-    canvas.style.display = 'none'; // Hide the canvas
-    document.body.style.backgroundColor = '#f0f0f0'; // Set a plain background color
-    return; // Exit the function
+// Modified drawLines function
+function drawLines() {
+  const lineDistance = isMobileDevice() ? 50 : 100; // Increase distance for fewer lines
+  
+  for (let i = 0; i < dots.length; i++) {
+    for (let j = i + 1; j < dots.length; j++) {
+      const dx = dots[i].x - dots[j].x;
+      const dy = dots[i].y - dots[j].y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      if (distance < lineDistance) {
+        ctx.beginPath();
+        ctx.moveTo(dots[i].x, dots[i].y);
+        ctx.lineTo(dots[j].x, dots[j].y);
+        ctx.strokeStyle = body.classList.contains('light-mode') ? '#000' : '#fff';
+        ctx.lineWidth = isMobileDevice() ? 0.3 : 0.5; // Thinner lines for mobile
+        ctx.stroke();
+      }
+    }
+  }
+}
+
+// Modified animate function with frame skipping
+let frameCount = 0;
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  // Skip every other frame on mobile
+  if(!isMobileDevice() || frameCount % 2 === 0) {
+    dots.forEach(dot => {
+      dot.update();
+      dot.draw();
+    });
+    drawLines();
+  }
+  
+  frameCount++;
+  requestAnimationFrame(animate);
+}
+document.addEventListener('DOMContentLoaded', () => {
+  // ========== THEME DETECTION & TOGGLE ========== //
+  const themeToggle = document.getElementById('theme-toggle');
+  const themeIcon = document.getElementById('theme-icon');
+  const body = document.body;
+
+  // Detect system theme
+  function detectSystemTheme() {
+    try {
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+        body.classList.add('light-mode');
+        themeIcon.textContent = '🌙';
+      } else {
+        body.classList.remove('light-mode');
+        themeIcon.textContent = '☀️';
+      }
+    } catch (e) {
+      // Fallback to dark mode if detection fails
+      body.classList.remove('light-mode');
+      themeIcon.textContent = '☀️';
+    }
   }
 
-  // Enable the animation for PCs
-  resizeCanvas();
+  // Check localStorage for user preference
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'light') {
+    body.classList.add('light-mode');
+    themeIcon.textContent = '🌙';
+  } else if (savedTheme === 'dark') {
+    body.classList.remove('light-mode');
+    themeIcon.textContent = '☀️';
+  } else {
+    // No saved preference - use system theme
+    detectSystemTheme();
+  }
 
-  const dots = [];
-  const dotCount = 100;
+  // Toggle theme on button click
+  themeToggle.addEventListener('click', () => {
+    body.classList.toggle('light-mode');
+    const isLightMode = body.classList.contains('light-mode');
+    localStorage.setItem('theme', isLightMode ? 'light' : 'dark');
+    themeIcon.textContent = isLightMode ? '🌙' : '☀️';
+  });
+
+  // ========== DOT BACKGROUND ANIMATION ========== //
+  const canvas = document.getElementById('hero-canvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 
   class Dot {
     constructor(x, y) {
@@ -37,23 +127,24 @@ function initBackgroundAnimation() {
     draw() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = '#ffffff';
+      ctx.fillStyle = body.classList.contains('light-mode') ? '#000' : '#fff';
       ctx.fill();
     }
 
     update() {
       this.x += this.vx;
       this.y += this.vy;
-
       if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
       if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
     }
   }
 
-  for (let i = 0; i < dotCount; i++) {
-    const x = Math.random() * canvas.width;
-    const y = Math.random() * canvas.height;
-    dots.push(new Dot(x, y));
+  let dots = [];
+  function initDots() {
+    dots = [];
+    for (let i = 0; i < 100; i++) {
+      dots.push(new Dot(Math.random() * canvas.width, Math.random() * canvas.height));
+    }
   }
 
   function drawLines() {
@@ -62,12 +153,11 @@ function initBackgroundAnimation() {
         const dx = dots[i].x - dots[j].x;
         const dy = dots[i].y - dots[j].y;
         const distance = Math.sqrt(dx * dx + dy * dy);
-
         if (distance < 100) {
           ctx.beginPath();
           ctx.moveTo(dots[i].x, dots[i].y);
           ctx.lineTo(dots[j].x, dots[j].y);
-          ctx.strokeStyle = '#ffffff';
+          ctx.strokeStyle = body.classList.contains('light-mode') ? '#000' : '#fff';
           ctx.stroke();
         }
       }
@@ -76,45 +166,60 @@ function initBackgroundAnimation() {
 
   function animate() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    for (let i = 0; i < dots.length; i++) {
-      dots[i].update();
-      dots[i].draw();
-    }
-
+    dots.forEach(dot => {
+      dot.update();
+      dot.draw();
+    });
     drawLines();
-
     requestAnimationFrame(animate);
   }
 
-  const ctx = canvas.getContext('2d');
+  initDots();
   animate();
-}
 
-// Function to resize the canvas
-function resizeCanvas() {
-  const canvas = document.getElementById('hero-canvas');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  const ctx = canvas.getContext('2d');
-  ctx.fillStyle = '#000000';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-}
+  // ========== TYPEWRITER EFFECT ========== //
+  const typewriterText = "Elevating Creativity Through Art";
+  const typewriterElement = document.querySelector('.typewriter');
+  let i = 0;
 
-// Add event listener to resize the canvas on window resize
-window.addEventListener('resize', resizeCanvas);
-
-// Add scroll down blur effect
-window.addEventListener('scroll', () => {
-  const scrollPosition = window.scrollY;
-  const heroSection = document.getElementById('hero-section');
-  const heroCanvas = document.getElementById('hero-canvas');
-
-  if (scrollPosition > 0) {
-    heroCanvas.style.filter = `blur(${scrollPosition / 10}px)`;
-    heroSection.style.filter = `blur(${scrollPosition / 10}px)`;
-  } else {
-    heroCanvas.style.filter = 'blur(0px)';
-    heroSection.style.filter = 'blur(0px)';
+  function typeWriter() {
+    if (i < typewriterText.length) {
+      typewriterElement.innerHTML += typewriterText.charAt(i);
+      i++;
+      setTimeout(typeWriter, 100);
+    }
   }
+  typeWriter();
+
+  // ========== SCROLL BLUR EFFECT ========== //
+  const heroCanvas = document.getElementById('hero-canvas');
+  window.addEventListener('scroll', () => {
+    const blurAmount = Math.min(window.scrollY / 100, 10);
+    heroCanvas.style.filter = `blur(${blurAmount}px)`;
+  });
+
+  // ========== GSAP ANIMATIONS ========== //
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Fix for disappearing CTA button
+  gsap.from('.cta-btn', {
+    opacity: 0,
+    y: 50,
+    duration: 1,
+    delay: 1.5,
+    onComplete: () => {
+      document.querySelector('.cta-btn').style.visibility = 'visible';
+    }
+  });
+
+  // Section animations
+  gsap.from('.portfolio-section', {
+    scrollTrigger: {
+      trigger: '.portfolio-section',
+      start: 'top 80%',
+    },
+    opacity: 0,
+    y: 50,
+    duration: 1
+  });
 });
