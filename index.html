@@ -14,11 +14,11 @@
   <!-- Navbar -->
   <header class="navbar">
     <a href="#hero" class="logo">Ritesh | Portfolio.</a>
-
     <ul class="nav-links">
       <li><a href="https://imimi328.github.io/Resume/" target="_blank">Resume</a></li>
       <li><a href="#videos">Videos</a></li>
       <li><a href="#photos">Photos</a></li>
+      <li><a href="#contact">Contact</a></li>
       <li>
         <button id="theme-toggle" aria-label="Toggle Theme">
           <span id="theme-icon">🌙</span>
@@ -43,7 +43,10 @@
       <h2 class="section-title">Video Editing</h2>
       <p class="section-desc">Immersive visuals brought to life through my edits.</p>
       <div class="video-gallery">
-        <!-- Video Links -->
+        <div class="video-card">
+          <iframe src="https://www.youtube.com/embed/ULtS0-kSJN0" allowfullscreen></iframe>
+          <h3>3D Animation</h3>
+        </div>
         <div class="video-card">
           <iframe src="https://player.vimeo.com/video/1033377518?h=2fdef938d4" allowfullscreen></iframe>
           <h3>Advertisement</h3>
@@ -51,6 +54,10 @@
         <div class="video-card">
           <iframe src="https://www.youtube.com/embed/r-Cxm-K4GVM" allowfullscreen></iframe>
           <h3>Documentary style</h3>
+        </div>
+        <div class="video-card">
+          <iframe src="https://www.youtube.com/embed/dgzO1jKTPio" allowfullscreen></iframe>
+          <h3>Gaming</h3>
         </div>
         <div class="video-card">
           <iframe src="https://www.youtube.com/embed/U9dUnVU8PEE" allowfullscreen></iframe>
@@ -66,11 +73,11 @@
         </div>
         <div class="video-card">
           <iframe src="https://www.youtube.com/embed/_WX0Kf51EYk" allowfullscreen></iframe>
-          <h3>3D Animation</h3>
+          <h3>3D Animation 1</h3>
         </div>
         <div class="video-card">
           <iframe src="https://www.youtube.com/embed/PZJk1k1mDIo" allowfullscreen></iframe>
-          <h3>3D Animation 1</h3>
+          <h3>3D Animation 2</h3>
         </div>
         <div class="video-card">
           <iframe src="https://www.youtube.com/embed/bi-gWYtmlY4" allowfullscreen></iframe>
@@ -103,7 +110,15 @@
       <p class="section-desc">Snapshots transformed into captivating visuals.</p>
       <div class="photo-gallery">
         <div class="photo-card">
-          <img src="https://i.ibb.co/4T2k29Q/Thumbnail-3.jpg" alt="Creative Edit 1">
+          <img src="https://i.ibb.co/GvQK56X3/Yi-LT8-J4bb-WY-maxresdefault.jpg" alt="Creative Edit 5">
+          <h3></h3>
+        </div>
+        <div class="photo-card">
+          <img src="https://i.ibb.co/Q78qdqXW/Thumnail-Intro-Com.jpg" alt="Creative Edit 10">
+          <h3></h3>
+        </div>
+        <div class="photo-card">
+          <img src="https://i.ibb.co/J8KdFMP/dgz-O1j-KTPio-maxresdefault.jpg" alt="Creative Edit 1">
           <h3></h3>
         </div>
         <div class="photo-card">
@@ -111,23 +126,11 @@
           <h3></h3>
         </div>
         <div class="photo-card">
-          <img src="https://i.ibb.co/kqw4HPt/Thumbnail.jpg" alt="Creative Edit 3">
+          <img src="https://i.ibb.co/JjhTwwZx/9-K7-NZfj-Qw-Yw-maxresdefault.jpg" alt="Creative Edit 3">
           <h3></h3>
         </div>
         <div class="photo-card">
           <img src="https://i.ibb.co/Rv3Zsz2/Advertisement.jpg" alt="Creative Edit 4">
-          <h3></h3>
-        </div>
-        <div class="photo-card">
-          <img src="https://i.ibb.co/LJVxRwP/Post-processing.jpg" alt="Creative Edit 5">
-          <h3></h3>
-        </div>
-        <div class="photo-card">
-          <img src="https://i.ibb.co/Fby5v6nB/Sample.jpg" alt="Creative Edit 6">
-          <h3></h3>
-        </div>
-        <div class="photo-card">
-          <img src="https://i.ibb.co/nMf9kcq4/PlayYume.png" alt="Creative Edit 7">
           <h3></h3>
         </div>
         <div class="photo-card">
@@ -138,15 +141,264 @@
           <img src="https://i.ibb.co/Y4XYwPb4/Thum2.jpg" alt="Creative Edit 9">
           <h3></h3>
         </div>
+        <div class="photo-card">
+          <img src="https://i.ibb.co/Fby5v6nB/Sample.jpg" alt="Creative Edit 6">
+          <h3></h3>
+        </div>
+        <div class="photo-card">
+          <img src="https://i.ibb.co/nMf9kcq4/PlayYume.png" alt="Creative Edit 7">
+          <h3></h3>
+        </div>
       </div>
     </div>
   </section>
-  
 
+  <!-- Contact Section (Enhanced with Inline CSS and JS) -->
+  <section id="contact" class="portfolio-section">
+    <style>
+      #contact {
+        position: relative;
+        background: #0f0f0f;
+        overflow: hidden;
+        transition: background 0.5s;
+      }
+
+      body.light-mode #contact {
+        background: #f0f0f0;
+      }
+
+      .contact-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        opacity: 0.3;
+      }
+
+      .contact-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        position: relative;
+        z-index: 1;
+        justify-items: center;
+        margin: 0 auto;
+        max-width: 1200px;
+      }
+
+      .contact-card {
+        background: #1a1a1a;
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        width: 100%;
+        max-width: 300px;
+        box-sizing: border-box;
+        min-height: 180px; /* Ensure uniform height */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      body.light-mode .contact-card {
+        background: #e0e0e0;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+      }
+
+      .contact-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+      }
+
+      body.light-mode .contact-card:hover {
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .contact-logo {
+        width: 40px;
+        height: 40px;
+        display: block;
+        margin: 0 auto 10px;
+        transition: transform 0.3s ease;
+        object-fit: contain; /* Prevent stretching */
+      }
+
+      .contact-card:hover .contact-logo {
+        transform: scale(1.2);
+      }
+
+      .contact-card h3 {
+        font-size: 1.5rem;
+        margin: 10px 0;
+        color: #ffffff;
+        font-family: 'Poppins', sans-serif;
+      }
+
+      body.light-mode .contact-card h3 {
+        color: #000;
+      }
+
+      .contact-link {
+        color: #00ffcb;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.1rem;
+        font-family: 'Poppins', sans-serif;
+        transition: color 0.3s ease;
+        word-break: break-all; /* Handle long usernames */
+      }
+
+      body.light-mode .contact-link {
+        color: #00aa7f;
+      }
+
+      .contact-link:hover {
+        color: #00ffaa;
+      }
+
+      @media (max-width: 768px) {
+        .contact-gallery {
+          grid-template-columns: 1fr;
+          gap: 15px;
+        }
+
+        .contact-card {
+          padding: 15px;
+          max-width: 280px;
+          min-height: 160px; /* Adjust for mobile */
+        }
+
+        .contact-logo {
+          width: 35px;
+          height: 35px;
+        }
+
+        .contact-card h3 {
+          font-size: 1.3rem;
+        }
+
+        .contact-link {
+          font-size: 1rem;
+        }
+      }
+    </style>
+    <div class="container">
+      <h2 class="section-title">Contact Me</h2>
+      <p class="section-desc">Let's connect and create something amazing together!</p>
+      <canvas id="contact-canvas" class="contact-canvas"></canvas>
+      <div class="contact-gallery">
+        <div class="contact-card">
+          <img src="https://i.ibb.co/GfFBzFhR/discord-logo-discord-icon-transparent-free-png.png" alt="Discord Logo" class="contact-logo">
+          <h3>Discord</h3>
+          <a href="https://www.discordapp.com/users/954607681694470165" class="contact-link">imimi_geimeo</a>
+        </div>
+        <div class="contact-card">
+          <img src="https://i.ibb.co/Tq4DWTmf/instagram-icon-512x512-ggh8x3cn.png" alt="Instagram Logo" class="contact-logo">
+          <h3>Instagram</h3>
+          <a href="https://www.instagram.com/cyberforge07/" class="contact-link">cyberforge07</a>
+        </div>
+        <div class="contact-card">
+          <img src="https://i.ibb.co/8nCm9krY/youtube-logo-a100.png" alt="YouTube Logo" class="contact-logo">
+          <h3>YouTube (Main)</h3>
+          <a href="https://www.youtube.com/@imimigeimeo" class="contact-link">Imimi geimeo</a>
+        </div>
+        <div class="contact-card">
+          <img src="https://i.ibb.co/8nCm9krY/youtube-logo-a100.png" alt="YouTube Logo" class="contact-logo">
+          <h3>YouTube (Second)</h3>
+          <a href="https://www.youtube.com/@TeamEmogi/videos" class="contact-link">Team Emogi</a>
+        </div>
+      </div>
+    </div>
+    <script>
+      // Mobile detection function (reused for consistency)
+      function isMobileDevice() {
+        return (
+          typeof window.orientation !== "undefined" ||
+          navigator.userAgent.match(/Android|webOS|iPhone|iPad|iPod|BlackBerry|Windows Phone/i)
+        );
+      }
+
+      // Particle animation for contact canvas (desktop only)
+      if (!isMobileDevice()) {
+        const contactCanvas = document.getElementById("contact-canvas");
+        if (contactCanvas) {
+          const ctx = contactCanvas.getContext("2d");
+          contactCanvas.width = contactCanvas.offsetWidth;
+          contactCanvas.height = contactCanvas.offsetHeight;
+
+          class Particle {
+            constructor() {
+              this.x = Math.random() * contactCanvas.width;
+              this.y = Math.random() * contactCanvas.height;
+              this.vx = (Math.random() - 0.5) * 2;
+              this.vy = (Math.random() - 0.5) * 2;
+              this.radius = Math.random() * 2 + 1;
+            }
+
+            draw() {
+              ctx.beginPath();
+              ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+              ctx.fillStyle = document.body.classList.contains("light-mode") ? "rgba(0, 0, 0, 0.5)" : "rgba(255, 255, 255, 0.5)";
+              ctx.fill();
+            }
+
+            update() {
+              this.x += this.vx;
+              this.y += this.vy;
+              if (this.x < 0 || this.x > contactCanvas.width) this.vx *= -1;
+              if (this.y < 0 || this.y > contactCanvas.height) this.vy *= -1;
+            }
+          }
+
+          let particles = [];
+          for (let i = 0; i < 50; i++) {
+            particles.push(new Particle());
+          }
+
+          function animateParticles() {
+            ctx.clearRect(0, 0, contactCanvas.width, contactCanvas.height);
+            particles.forEach(particle => {
+              particle.update();
+              particle.draw();
+            });
+            requestAnimationFrame(animateParticles);
+          }
+
+          animateParticles();
+
+          // Resize canvas on window resize
+          window.addEventListener("resize", () => {
+            contactCanvas.width = contactCanvas.offsetWidth;
+            contactCanvas.height = contactCanvas.offsetHeight;
+          });
+        }
+      }
+
+      // GSAP animation for contact cards
+      gsap.from(".contact-card", {
+        scrollTrigger: {
+          trigger: "#contact",
+          start: "top 80%",
+        },
+        opacity: 0,
+        y: 50,
+        scale: 0.8,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: "power2.out",
+      });
+    </script>
+  </section>
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2025 Ritesh Verma. || Team Emogi. All rights reserved.</p>
+    <p>© 2025 Ritesh Verma. || Team Emogi. All rights reserved.</p>
     <p>Contact me: Discord: <a href="https://www.discordapp.com/users/954607681694470165">imimi_geimeo</a> | Instagram: <a href="https://www.instagram.com/cyberforge07/">cyberforge07</a></p>
   </footer>
 
